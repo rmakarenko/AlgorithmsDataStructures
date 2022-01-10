@@ -96,7 +96,7 @@ class LinkedList:
 
     def len(self):
         
-        if self.head == None
+        if self.head is None:
             return 0
         
         node = self.head
