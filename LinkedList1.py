@@ -95,6 +95,10 @@ class LinkedList:
         self.tail = None
 
     def len(self):
+        
+        if self.head == None
+            return 0
+        
         node = self.head
         count = 1
         while node.next != None:
