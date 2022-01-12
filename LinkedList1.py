@@ -85,7 +85,7 @@ class LinkedList:
                         if node.value == val:
                             previous.next = node.next
                             node = node.next
-                            previous = previous.next
+                            # previous = previous.next
                         else:
                             node = node.next
                             previous = previous.next
