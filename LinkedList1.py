@@ -61,7 +61,6 @@ class LinkedList:
                     return node
                 if node is None:
                     break
-
         if all:
             count = 0
             node = self.head
@@ -69,7 +68,6 @@ class LinkedList:
                 if node.value == val:
                     count += 1
                 node = node.next
-
             for i in range(count):
                 if self.head.value == val:
                     self.head = self.head.next
@@ -81,24 +79,26 @@ class LinkedList:
                     node.next = None
                 else:
                     node = self.head
-                    while True:
-                        prev = node
-                        node = node.next
+                    previous = node
+                    node = node.next
+                    while node != self.tail:
                         if node.value == val:
-                            prev.next = node.next
-                            return node
-                        if node is None:
-                            break
+                            previous.next = node.next
+                            node = node.next
+                            previous = previous.next
+                        else:
+                            node = node.next
+                            previous = previous.next
 
     def clean(self):
         self.head = None
         self.tail = None
 
     def len(self):
-        
+
         if self.head is None:
             return 0
-        
+
         node = self.head
         count = 1
         while node.next != None:
@@ -113,8 +113,8 @@ class LinkedList:
             node_for_insert.next = self.head
             self.head = node_for_insert
         else:
-            node_for_insert = Node(newNode)  # создать новый узел
-            node = self.head  # найти узел афтернод и сохранить в буфер его следующий элемент, присвоить ему следующий элемент = новый узел
+            node_for_insert = Node(newNode)
+            node = self.head  
             while node is not None:
                 if node.value == afterNode:
                     buffered_item = node.next
