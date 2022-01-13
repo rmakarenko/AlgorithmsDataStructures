@@ -17,11 +17,11 @@ class LinkedList:
             self.tail.next = item
         self.tail = item
 
-    def print_all_nodes(self):
-        node = self.head
-        while node != None:
-            print(node.value)
-            node = node.next
+#     def print_all_nodes(self):
+#         node = self.head
+#         while node != None:
+#             print(node.value)
+#             node = node.next
 
     def find(self, val):
         node = self.head
