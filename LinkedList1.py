@@ -55,12 +55,14 @@ class LinkedList:
                         previous.next = node.next
                         if node.next is None:
                             self.tail = node
+                        if not all_flag:
+                            break
                     else:
                         previous = node
                     node = node.next
-            if not all_flag:
-                break
-
+                if not all_flag:
+                    break
+                    
     def clean(self):
         self.head = None
         self.tail = None
