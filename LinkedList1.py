@@ -17,12 +17,6 @@ class LinkedList:
             self.tail.next = item
         self.tail = item
 
-#     def print_all_nodes(self):
-#         node = self.head
-#         while node != None:
-#             print(node.value)
-#             node = node.next
-
     def find(self, val):
         node = self.head
         while node is not None:
@@ -41,17 +35,27 @@ class LinkedList:
             node = node.next
         return nodes
 
-    def delete(self, val, all_flag = False):
+    def delete(self, val, all_flag=False):
 
         node = self.head
         while node is not None:
+
+            if self.len() == 1 and self.head.value == val:
+                self.head = None
+                self.tail = None
+                node = None
+                break
             if self.head.value == val:
                 self.head = self.head.next
             else:
                 node = self.head.next
                 previous = self.head
                 while node is not None:
-                    if node.value == val:
+                    if node.value == val and self.len() == 1:
+                        self.head = None
+                        self.tail = None
+                        node = None
+                    elif node.value == val:
                         previous.next = node.next
                         if node.next is None:
                             self.tail = previous
@@ -60,9 +64,12 @@ class LinkedList:
                     else:
                         previous = node
                     node = node.next
+
+                if self.len() == 1:
+                    break
                 if not all_flag:
                     break
-                    
+
     def clean(self):
         self.head = None
         self.tail = None
@@ -92,7 +99,8 @@ class LinkedList:
                     buffered_item = node.next
                     node.next = node_for_insert
                     break
-                else: node = node.next
+                else:
+                    node = node.next
 
             node_for_insert.next = buffered_item
 
