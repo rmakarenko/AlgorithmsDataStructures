@@ -54,7 +54,7 @@ class LinkedList:
                     if node.value == val:
                         previous.next = node.next
                         if node.next is None:
-                            self.tail = node
+                            self.tail = previous
                         if not all_flag:
                             break
                     else:
