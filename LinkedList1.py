@@ -41,54 +41,25 @@ class LinkedList:
             node = node.next
         return nodes
 
-    def delete(self, val, all = False):
+    def delete(self, val, all_flag = False):
 
-        if self.head.value == val:
-            self.head = self.head.next
-        elif self.tail.value == val:
-            node = self.head
-            while node.next != self.tail:
-                node = node.next
-            self.tail = node
-            node.next = None
-        else:
-            node = self.head
-            while True:
-                prev = node
-                node = node.next
-                if node.value == val:
-                    prev.next = node.next
-                    return node
-                if node is None:
-                    break
-        if all:
-            count = 0
-            node = self.head
-            while node is not None:
-                if node.value == val:
-                    count += 1
-                node = node.next
-            for i in range(count):
-                if self.head.value == val:
-                    self.head = self.head.next
-                elif self.tail.value == val:
-                    node = self.head
-                    while node.next != self.tail:
-                        node = node.next
-                    self.tail = node
-                    node.next = None
-                else:
-                    node = self.head
-                    previous = node
+        node = self.head
+        while node is not None:
+            if self.head.value == val:
+                self.head = self.head.next
+            else:
+                node = self.head.next
+                previous = self.head
+                while node is not None:
+                    if node.value == val:
+                        previous.next = node.next
+                        if node.next is None:
+                            self.tail = node
+                    else:
+                        previous = node
                     node = node.next
-                    while node != self.tail:
-                        if node.value == val:
-                            previous.next = node.next
-                            node = node.next
-                            # previous = previous.next
-                        else:
-                            node = node.next
-                            previous = previous.next
+            if not all_flag:
+                break
 
     def clean(self):
         self.head = None
@@ -98,7 +69,6 @@ class LinkedList:
 
         if self.head is None:
             return 0
-
         node = self.head
         count = 1
         while node.next != None:
@@ -113,8 +83,8 @@ class LinkedList:
             node_for_insert.next = self.head
             self.head = node_for_insert
         else:
-            node_for_insert = Node(newNode)
-            node = self.head  
+            node_for_insert = Node(newNode)  # создать новый узел
+            node = self.head  # найти узел афтернод и сохранить в буфер его следующий элемент, присвоить ему следующий элемент = новый узел
             while node is not None:
                 if node.value == afterNode:
                     buffered_item = node.next
