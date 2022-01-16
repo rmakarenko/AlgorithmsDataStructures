@@ -27,7 +27,13 @@ class LinkedListTests(unittest.TestCase):
         self.assertEqual(2, self.s_list.find_all(2)[0].value, " Функция возвращает некорректный список ")
         self.assertEqual(3, self.s_list.find_all(3)[0].value, " Функция возвращает некорректный список ")
         self.assertEqual([], self.s_list.find_all(5), " Функция возвращает некорректный список ")
+    
+    def test_delete_len_check(self):
 
+        self.assertEqual(self.s2_list.len(), 2, "Значение длины до удаления некорректно")
+        self.s2_list.delete(1, False)
+        self.assertEqual(self.s2_list.len(), 1, "Значение длины после удаления некорректно")
+    
     def test_delete(self):
 
         self.s_list.delete(4, True)
