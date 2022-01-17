@@ -1,8 +1,8 @@
 import unittest
 
-from linked2 import Node
+from LinkedList1 import Node
 
-from linked2 import LinkedList
+from LinkedList1 import LinkedList
 
 class LinkedListTests(unittest.TestCase):
 
@@ -56,28 +56,36 @@ class LinkedListTests(unittest.TestCase):
         self.s2_list.delete(2, False)
         self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 1, "Значение элемента tail некорректно")
-        self.assertEqual(self.s_list.tail.next, None, "next не указывает на None")
+        self.assertEqual(self.s2_list.tail.next, None, "next не указывает на None")
 
     def test_delete_head_false(self):
 
         self.s2_list.delete(1, False)
         self.assertEqual(self.s2_list.head.value, 2, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
-        self.assertEqual(self.s_list.tail.next, None, "next не указывает на None")
+        self.assertEqual(self.s2_list.tail.next, None, "next не указывает на None")
 
     def test_delete_tail_true(self):
 
         self.s2_list.delete(2, True)
         self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 1, "Значение элемента tail некорректно")
-        self.assertEqual(self.s_list.tail.next, None, "next не указывает на None")
+        self.assertEqual(self.s2_list.tail.next, None, "next не указывает на None")
+        self.assertEqual(self.s2_list.len(), 1, "len should be 1")
 
     def test_delete_head_true(self):
 
         self.s2_list.delete(1, True)
         self.assertEqual(self.s2_list.head.value, 2, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
-        self.assertEqual(self.s_list.tail.next, None, "next не указывает на None")
+        self.assertEqual(self.s2_list.tail.next, None, "next не указывает на None")
+
+    def test_delete_single_head(self):
+        s3_list = LinkedList()
+        s3_list.add_in_tail(Node(1))
+        s3_list.delete(1, True)
+        self.assertEqual(s3_list.head, None, "Значение элемента head некорректно")
+        self.assertEqual(s3_list.tail, None, "Значение элемента tail некорректно")
 
 if __name__ == '__main__':
 

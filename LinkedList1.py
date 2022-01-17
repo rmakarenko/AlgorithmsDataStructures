@@ -36,42 +36,43 @@ class LinkedList:
         return nodes
 
     def delete(self, val, all_flag=False):
+        if not self.head:
+            return
 
-        node = self.head
-        while node is not None:
+        node = self.head.next
+        prev = self.head
 
-            if self.len() == 1 and self.head.value == val:
-                self.head = None
-                self.tail = None
-                node = None
-                break
+        r = 0
 
-            if self.head.value == val:
-                self.head = self.head.next
+        while node is not None and (all_flag or (not all_flag and r < 1)):
+            if prev and prev.value == val and prev == self.head:
+                self.head = node
+                prev = node
                 node = node.next
+                r+=1
+                continue
 
-            else:
-                node = self.head.next
-                previous = self.head
-                while node is not None:
-                    if node.value == val and self.len() == 1:
-                        self.head = None
-                        self.tail = None
-                        node = None
-                    elif node.value == val:
-                        previous.next = node.next
-                        if node.next is None:
-                            self.tail = previous
-                        if not all_flag:
-                            break
-                    else:
-                        previous = node
-                    node = node.next
+            if node.value == val:
+                prev.next = node.next
+                node = node.next
+                
+                r+=1
+                continue
 
-            if self.len() == 1:
+            if not node:
                 break
-                if not all_flag:
-                    break
+            prev = node
+            node = node.next
+
+        if node is None:
+            if prev and prev.value !=val:
+                self.tail = prev
+            else:
+                self.clean()
+
+        if self.tail:
+            self.tail.next = None
+
 
     def clean(self):
         self.head = None
