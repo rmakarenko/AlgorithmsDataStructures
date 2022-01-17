@@ -45,8 +45,11 @@ class LinkedList:
                 self.tail = None
                 node = None
                 break
+
             if self.head.value == val:
                 self.head = self.head.next
+                node = node.next
+
             else:
                 node = self.head.next
                 previous = self.head
@@ -65,8 +68,8 @@ class LinkedList:
                         previous = node
                     node = node.next
 
-                if self.len() == 1:
-                    break
+            if self.len() == 1:
+                break
                 if not all_flag:
                     break
 
@@ -83,6 +86,7 @@ class LinkedList:
         while node.next != None:
             node = node.next
             count += 1
+
         return count
 
     def insert(self, afterNode, newNode):
