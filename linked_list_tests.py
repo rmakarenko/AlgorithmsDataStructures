@@ -31,6 +31,8 @@ class LinkedListTests(unittest.TestCase):
     def test_delete_len_check(self):
 
         self.assertEqual(self.s2_list.len(), 2, "Значение длины до удаления некорректно")
+        self.assertEqual(self.s2_list.head.next, self.s2_list.tail, "Next элемента head не указывает на второй элемент")
+        self.assertEqual(self.s2_list.tail.next, None, "Next элемента tail не указывает на None")
         self.s2_list.delete(1, False)
         self.assertEqual(self.s2_list.len(), 1, "Значение длины после удаления некорректно")
         self.assertEqual(self.s2_list.head.next, None, "Next элемента head не указывает на None")
