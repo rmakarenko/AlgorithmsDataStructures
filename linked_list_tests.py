@@ -27,13 +27,15 @@ class LinkedListTests(unittest.TestCase):
         self.assertEqual(2, self.s_list.find_all(2)[0].value, " Функция возвращает некорректный список ")
         self.assertEqual(3, self.s_list.find_all(3)[0].value, " Функция возвращает некорректный список ")
         self.assertEqual([], self.s_list.find_all(5), " Функция возвращает некорректный список ")
-    
+
     def test_delete_len_check(self):
 
         self.assertEqual(self.s2_list.len(), 2, "Значение длины до удаления некорректно")
         self.s2_list.delete(1, False)
         self.assertEqual(self.s2_list.len(), 1, "Значение длины после удаления некорректно")
-    
+        self.assertEqual(self.s2_list.head.next, None, "Next элемента head не указывает на None")
+        self.assertEqual(self.s2_list.tail.next, None, "Next элемента tail не указывает на None")
+
     def test_delete(self):
 
         self.s_list.delete(4, True)
@@ -49,7 +51,6 @@ class LinkedListTests(unittest.TestCase):
 
     def test_delete_tail_false(self):
 
-        self.s2_list.print_all_nodes()
         self.s2_list.delete(2, False)
         self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 1, "Значение элемента tail некорректно")
@@ -57,7 +58,6 @@ class LinkedListTests(unittest.TestCase):
 
     def test_delete_head_false(self):
 
-        self.s2_list.print_all_nodes()
         self.s2_list.delete(1, False)
         self.assertEqual(self.s2_list.head.value, 2, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
@@ -65,7 +65,6 @@ class LinkedListTests(unittest.TestCase):
 
     def test_delete_tail_true(self):
 
-        self.s2_list.print_all_nodes()
         self.s2_list.delete(2, True)
         self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 1, "Значение элемента tail некорректно")
@@ -73,7 +72,6 @@ class LinkedListTests(unittest.TestCase):
 
     def test_delete_head_true(self):
 
-        self.s2_list.print_all_nodes()
         self.s2_list.delete(1, True)
         self.assertEqual(self.s2_list.head.value, 2, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
