@@ -4,6 +4,7 @@ class Node:
         self.value = v
         self.next = None
 
+
 class LinkedList:
 
     def __init__(self):
@@ -37,41 +38,40 @@ class LinkedList:
 
     def delete(self, val, all_flag=False):
 
-        node = self.head
+        previous = self.head
+
+        if previous is None:  # handle empty list
+            return
+
+        node = previous.next  # if node is None next while will not start
+
+        if val == previous.value:
+            self.head = node
+            if self.head is None:
+                previous = None
+            if all_flag == False:
+                if self.head is None:
+                    self.tail = None
+                return
+
         while node is not None:
-
-            if self.len() == 1 and self.head.value == val:
-                self.head = None
-                self.tail = None
-                node = None
-                break
-
-            if self.head.value == val:
-                self.head = self.head.next
+            if node.value == val:
+                if self.head == node:
+                    self.head = node.next
+                previous.next = node.next
                 node = node.next
-
-            else:
-                node = self.head.next
-                previous = self.head
-                while node is not None:
-                    if node.value == val and self.len() == 1:
-                        self.head = None
-                        self.tail = None
-                        node = None
-                    elif node.value == val:
-                        previous.next = node.next
-                        if node.next is None:
-                            self.tail = previous
-                        if not all_flag:
-                            break
-                    else:
-                        previous = node
-                    node = node.next
-
-            if self.len() == 1:
-                break
-                if not all_flag:
+                if self.head is None:
+                    previous = None
+                if all_flag == False:
                     break
+                else:
+                    continue
+            previous = previous.next
+            node = node.next
+
+        if node is None:   # self.tail == node
+            self.tail = previous
+
 
     def clean(self):
         self.head = None
