@@ -91,11 +91,18 @@ class LinkedList:
 
     def insert(self, afterNode, newNode):
 
-        if afterNode is None:
+        if afterNode is None and self.len() == 0:
+
             node_for_insert = Node(newNode)
             node_for_insert.next = None
             self.head = node_for_insert
             self.tail = node_for_insert
+
+        elif afterNode is None and self.len() != 0:
+
+            node_ex_head = self.head
+            self.head = Node(newNode)
+            newNode.next = node_ex_head
 
         else:
             node_for_insert = Node(newNode)  # создать новый узел
