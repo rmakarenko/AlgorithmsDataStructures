@@ -93,20 +93,22 @@ class LinkedList:
 
         if afterNode is None:
             node_for_insert = Node(newNode)
-            node_for_insert.next = self.head
+            node_for_insert.next = None
             self.head = node_for_insert
+            self.tail = node_for_insert
+
         else:
             node_for_insert = Node(newNode)  # создать новый узел
             node = self.head  # найти узел афтернод и сохранить в буфер его следующий элемент, присвоить ему следующий элемент = новый узел
+
             while node is not None:
                 if node.value == afterNode:
                     buffered_item = node.next
                     node.next = node_for_insert
+                    node_for_insert.next = buffered_item
                     break
                 else:
                     node = node.next
-
-            node_for_insert.next = buffered_item
 
             if self.tail.value == afterNode:
                 self.tail = node_for_insert
