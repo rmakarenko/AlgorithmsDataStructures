@@ -1,12 +1,14 @@
 import unittest
 
-from linked_from_git import Node
+from evgen_variant import Node
 
-from linked_from_git import LinkedList
+from evgen_variant import LinkedList
 
 class LinkedListTests(unittest.TestCase):
 
     def setUp(self):
+
+        self.empty_list = LinkedList()
 
         self.s2_list = LinkedList()
         self.s2_list.add_in_tail(Node(1))
@@ -40,6 +42,45 @@ class LinkedListTests(unittest.TestCase):
         self.s_list3.add_in_tail(Node(2))
         self.s_list3.add_in_tail(Node(2))
 
+    def test_insert_into_None(self):
+
+        # проверим, что head и tail None
+
+        self.assertEqual(self.empty_list.head, None, "Значение элемента head некорректно")
+        self.assertEqual(self.empty_list.tail, None, "Значение элемента tail некорректно")
+
+        self.empty_list.insert(None, 1)
+
+        self.assertEqual(self.empty_list.head.value, 1, "Значение элемента head некорректно")
+        self.assertEqual(self.empty_list.tail.value, 1, "Значение элемента tail некорректно")
+        self.assertEqual(self.empty_list.head.next, None, "Значение элемента head некорректно")
+        self.assertEqual(self.empty_list.tail.next, None, "Значение элемента tail некорректно")
+
+    def test_insert_into_list(self):
+
+        # проверим, что head и tail 1 и 2 соответственно
+
+        self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
+        self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
+
+        self.s2_list.insert(1, 3)
+
+        self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
+        self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
+        self.assertEqual(self.s2_list.head.next.value, 3, "Значение элемента head некорректно")
+        self.assertEqual(self.s2_list.tail.next, None, "Значение элемента tail.next некорректно")
+
+    def test_insert_into_list_in_tail(self):
+
+        self.s2_list.insert(2, 3)
+
+        self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
+        self.assertEqual(self.s2_list.tail.value, 3, "Значение элемента tail некорректно")
+        self.assertEqual(self.s2_list.head.next.value, 2, "Значение элемента head некорректно")
+        self.assertEqual(self.s2_list.tail.next, None, "Значение элемента tail.next некорректно")
+
+
+
     def test_delete_00111222_check(self):
 
         self.s3_list = LinkedList()
@@ -53,7 +94,7 @@ class LinkedListTests(unittest.TestCase):
 
         self.s3_list.delete(1, True)  # останется 0 0 2 2
 
-        self.assertEqual(4, self.s_list.len(), " Функция возвращает список некорректной длины")
+        self.assertEqual(4, self.s3_list.len(), " Функция возвращает список некорректной длины")
 
         self.s3_list.delete(2, True)  # останется 0 0
 
@@ -71,8 +112,6 @@ class LinkedListTests(unittest.TestCase):
         self.s3_list.delete(0, False)  # будет удален первый ноль, не останется ничего
         self.assertEqual(self.s3_list.head, None, "head не none")
         self.assertEqual(self.s3_list.tail, None, "tail не none")
-        self.assertEqual(self.s3_list.head.next, None, "Next элемента head не указывает на None")
-        self.assertEqual(self.s3_list.tail.next, None, "Next элемента tail не указывает на None")
 
     def test_find_all(self):
 
@@ -122,7 +161,6 @@ class LinkedListTests(unittest.TestCase):
         self.assertEqual(self.s2_list.head.value, 2, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 2, "Значение элемента tail некорректно")
         self.assertEqual(self.s_list.tail.next, None, "next не указывает на None")
-        print("head test passed")
 
     def test_delete_tail_true(self):
 
@@ -130,7 +168,6 @@ class LinkedListTests(unittest.TestCase):
         self.assertEqual(self.s2_list.head.value, 1, "Значение элемента head некорректно")
         self.assertEqual(self.s2_list.tail.value, 1, "Значение элемента tail некорректно")
         self.assertEqual(self.s_list.tail.next, None, "next не указывает на None")
-        print("tail test passed")
 
     def test_delete_head_true(self):
 
